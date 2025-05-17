@@ -1,0 +1,120 @@
+{
+    "opleiding": {
+        "naam": "Accounting Administation",
+        "type": "Graduaat",
+        "onderwijsinstelling": "Arteveldehogeschool",
+        "studiepunten": 120
+    },
+    "vakken": [
+        {
+            "naam": "Bedrijfsorganisatie",
+            "studiepunten": 3,
+            "periode": ["M1", "M3"]
+        },
+        {
+            "naam": "Professionele communicatie",
+            "studiepunten": 4,
+            "periode": ["M1", "M3"]
+        },
+        {
+            "naam": "Accounting 1",
+            "studiepunten": 5,
+            "periode": ["M1", "M3"]
+        },
+        {
+            "naam": "Bedrijfstools",
+            "studiepunten": 4,
+            "periode": ["M2", "M4"]
+        },
+        {
+            "naam": "Btw",
+            "studiepunten": 4,
+            "periode": ["M2", "M4"]
+        },
+        {
+            "naam": "Accounting 2",
+            "studiepunten": 4,
+            "periode": ["M2", "M4"]
+        },
+        {
+            "naam": "Accounting 3",
+            "studiepunten": 7,
+            "periode": ["M3", "M1"]
+        },
+        {
+            "naam": "Digitale accounting 1",
+            "studiepunten": 3,
+            "periode": ["M3", "M1"]
+        },
+        {
+            "naam": "Recht",
+            "studiepunten": 4,
+            "periode": ["M4", "M2"]
+        },
+        {
+            "naam": "Personenbelasting",
+            "studiepunten": 4,
+            "periode": ["M4", "M2"]
+        },
+        {
+            "naam": "Professionele ontwikkeling 1",
+            "studiepunten": 3,
+            "periode": ["S2", "S1"]
+        },
+        {
+            "naam": "Werkplekleren 1",
+            "studiepunten": 12,
+            "periode": ["J"]
+        },
+        {
+            "naam": "Vennootschapsboekhouden",
+            "studiepunten": 5,
+            "periode": ["M1", "M3"]
+        },
+        {
+            "naam": "Vennootschapsbelasting",
+            "studiepunten": 4,
+            "periode": ["M1", "M3"]
+        },
+        {
+            "naam": "Werkplekleren 2",
+            "studiepunten": 14,
+            "periode": ["M2","M4"]
+        },
+        {
+            "naam": "Professionele ontwikkeling 2",
+            "studiepunten": 3,
+            "periode": ["S1", "S2"]
+        },
+        {
+            "naam": "Cost en management accounting",
+            "studiepunten": 3,
+            "periode": ["M3", "M1"]
+        },
+        {
+            "naam": "Financiële analyse",
+            "studiepunten": 4,
+            "periode": ["M3", "M1"]
+        },
+        {
+            "naam": "Digitale accounting 2",
+            "studiepunten": 4,
+            "periode": ["M3", "M1"]
+        },
+        {
+            "naam": "Professionele ontwikkeling 3",
+            "studiepunten": 3,
+            "periode": ["S2", "S1"]
+        },
+        {
+            "naam": "Werkplekleren 3",
+            "studiepunten": 14,
+            "periode": ["S2", "S1"]
+        },
+        {
+            "naam": "Graduaatsproject",
+            "studiepunten": 3,
+            "periode": ["M4", "M2"]
+        }
+    ]
+}

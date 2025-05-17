@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studietraject Planner Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-4 md:p-8 font-sans bg-gray-100">
+    <div class="container mx-auto">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Studietraject Planner</h1>
+            <p class="text-gray-600 mt-2">Plan je persoonlijke studieroute (Graduaat Accounting Administration)</p>
+        </header>
+
+        <div id="studentInfo" class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-blue-50 text-blue-900 p-4 rounded-lg border border-blue-200">
+                <h3 class="font-semibold text-lg">Behaalde Studiepunten</h3>
+                <p id="behaaldeSp" class="text-2xl font-bold">0 SP</p>
+            </div>
+            <div class="bg-blue-50 text-blue-900 p-4 rounded-lg border border-blue-200">
+                <h3 class="font-semibold text-lg">SP in Huidig Traject</h3>
+                <p id="huidigTrajectSp" class="text-2xl font-bold">0 SP</p>
+            </div>
+        </div>
+
+        <div class="space-y-8">
+            <div id="timeline" class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Jaaroverzicht</h2>
+                <div class="space-y-8">
+                    <!-- Jaar 2 -->
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-4">Jaar 2</h3>
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 5</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 6</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 7</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 8</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Jaar 3 -->
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-4">Jaar 3</h3>
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 9</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 10</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 11</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-gray-700">Module 12</h4>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px]"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div>
+                                <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Beschikbare Vakken</h2>
+                <div id="vakkenLijstPdf" class="space-y-4">
+                    <!-- Example course card -->
+                    <div class="flex items-center justify-between bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+                        <input type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                        <span class="flex-grow ml-4 text-gray-800">Course Name</span>
+                        <span class="text-indigo-600 font-medium">0 SP</span>
+                    </div>
+                    <!-- Repeat for other courses -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
