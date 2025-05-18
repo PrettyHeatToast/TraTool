@@ -213,8 +213,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     const details = courseCard.querySelector('.details');
                     details.textContent = `${vak.studiepunten} SP - ${vak.periode.join('/')}`;
                     details.style.display = 'block';
-                    courseCard.classList.remove('text-sm', 'text-xs');
-                    sidebarDropzone.appendChild(courseCard);
+                    courseCard.classList.remove('text-xs');
+                    sidebarDropzone.prepend(courseCard);
                     updateSidebarAndPoints();
                 }
             });
