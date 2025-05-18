@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 // Calculate study points for courses not yet taken (unchecked in sidebar)
-                sidebarDropzone.querySelectorAll('> div').forEach(courseCard => {
+                Array.from(sidebarDropzone.children).forEach(courseCard => {
                     const checkbox = courseCard.querySelector('.checkbox');
-                    if (!checkbox.checked) {
+                    if (checkbox && !checkbox.checked) {
                         const details = courseCard.querySelector('.details').textContent;
                         const studiepunten = parseInt(details.split(' ')[0]);
                         nogOpTeNemenSp += studiepunten;
