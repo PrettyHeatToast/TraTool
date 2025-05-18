@@ -15,7 +15,7 @@
             <p class="text-gray-600 mt-2">Plan je persoonlijke studieroute</p>
         </header>
 
-        <div id="studentInfo" class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div id="studentInfo" class="mb-4 grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="bg-blue-50 text-blue-900 p-4 rounded-lg border border-blue-200">
                 <h3 class="font-semibold text-lg">Behaalde Studiepunten</h3>
                 <p id="behaaldeSp" class="text-2xl font-bold">0 SP</p>
@@ -25,8 +25,12 @@
                 <p id="huidigTrajectSp" class="text-2xl font-bold">0 SP</p>
             </div>
             <div class="bg-blue-50 text-blue-900 p-4 rounded-lg border border-blue-200">
+                <h3 class="font-semibold text-lg">Nog op te nemen studiepunten</h3>
+                <p id="nogOpTeNemenSp" class="text-2xl font-bold">0 SP</p>
+            </div>
+            <div class="bg-blue-50 text-blue-900 p-4 rounded-lg border border-blue-200">
                 <h3 class="font-semibold text-lg">Totale studiepunten</h3>
-                <p id="huidigTrajectSp" class="text-2xl font-bold">0 SP</p>
+                <p id="totaleSp" class="text-2xl font-bold">0 SP</p>
             </div>
         </div>
 
@@ -39,47 +43,47 @@
                     <div>
                         <h3 class="font-semibold text-lg text-gray-800 mb-4">Jaar 2</h3>
                         <div class="grid grid-cols-4 gap-4">
-                            <div class="space-y-2" id="module-5" data-period="M1/M3">
+                            <div class="space-y-2" id="module-5" data-period="M1">
                                 <h4 class="font-semibold text-gray-700">Module 5</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-6" data-period="M2/M4">
+                            <div class="space-y-2" id="module-6" data-period="M2">
                                 <h4 class="font-semibold text-gray-700">Module 6</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-7" data-period="M1/M3">
+                            <div class="space-y-2" id="module-7" data-period="M3">
                                 <h4 class="font-semibold text-gray-700">Module 7</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-8" data-period="M2/M4">
+                            <div class="space-y-2" id="module-8" data-period="M4">
                                 <h4 class="font-semibold text-gray-700">Module 8</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-2">
-                            <div id="jaar1-semester1" data-period="S1/S2">
+                            <div id="jaar1-semester1" data-period="S1">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
-                            <div id="jaar1-semester2" data-period="S1/S2">
+                            <div id="jaar1-semester2" data-period="S2">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
                         </div>
                         <div class="mt-2">
                             <div id="jaar1" data-period="J">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
                         </div>
@@ -88,47 +92,47 @@
                     <div>
                         <h3 class="font-semibold text-lg text-gray-800 mb-4">Jaar 3</h3>
                         <div class="grid grid-cols-4 gap-4">
-                            <div class="space-y-2" id="module-9" data-period="M1/M3">
+                            <div class="space-y-2" id="module-9" data-period="M1">
                                 <h4 class="font-semibold text-gray-700">Module 9</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-10" data-period="M2/M4">
+                            <div class="space-y-2" id="module-10" data-period="M2">
                                 <h4 class="font-semibold text-gray-700">Module 10</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-11" data-period="M1/M3">
+                            <div class="space-y-2" id="module-11" data-period="M3">
                                 <h4 class="font-semibold text-gray-700">Module 11</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
-                            <div class="space-y-2" id="module-12" data-period="M2/M4">
+                            <div class="space-y-2" id="module-12" data-period="M4">
                                 <h4 class="font-semibold text-gray-700">Module 12</h4>
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[120px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[120px] dropzone">
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-2">
-                            <div id="jaar3-semester1" data-period="S1/S2">
+                            <div id="jaar3-semester1" data-period="S1">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
-                            <div id="jaar3-semester2" data-period="S1/S2">
+                            <div id="jaar3-semester2" data-period="S2">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
                         </div>
                         <div class="mt-2">
                             <div id="jaar3" data-period="J">
                                 <div
-                                    class="border-2 border-dashed border-gray-400 rounded-lg p-4 bg-gray-50 min-h-[40px] dropzone">
+                                    class="border-2 border-dashed border-gray-400 rounded-lg p-2 bg-gray-50 min-h-[40px] dropzone">
                                 </div>
                             </div>
                         </div>

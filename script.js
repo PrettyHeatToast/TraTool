@@ -9,13 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const vakkenLijst = document.getElementById('vakkenLijst');
             const behaaldeSpElement = document.getElementById('behaaldeSp');
             const huidigTrajectSpElement = document.getElementById('huidigTrajectSp');
-            const totaleSpElement = document.querySelectorAll('#huidigTrajectSp')[1];
+            const nogOpTeNemenSpElement = document.getElementById('nogOpTeNemenSp');
+            const totaleSpElement = document.getElementById('totaleSp');
 
             vakkenLijst.innerHTML = ''; // Clear existing content
 
             const updateStudyPoints = () => {
                 let behaaldeSp = 0;
                 let huidigTrajectSp = 0;
+                let nogOpTeNemenSp = 0;
 
                 // Calculate behaalde studiepunten
                 document.querySelectorAll('#vakkenLijst .checkbox:checked').forEach(checkbox => {
@@ -32,10 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     huidigTrajectSp += studiepunten;
                 });
 
+                // Calculate nog op te nemen studiepunten
+                document.querySelectorAll('#vakkenLijst > div').forEach(courseCard => {
+                    const checkbox = courseCard.querySelector('.checkbox');
+                    if (!checkbox.checked) {
+                        const details = courseCard.querySelector('.details').textContent;
+                        const studiepunten = parseInt(details.split(' ')[0]);
+                        nogOpTeNemenSp += studiepunten;
+                    }
+                });
+
                 // Update totals
-                const totaleSp = behaaldeSp + huidigTrajectSp;
+                const totaleSp = behaaldeSp + huidigTrajectSp + nogOpTeNemenSp;
                 behaaldeSpElement.textContent = `${behaaldeSp} SP`;
                 huidigTrajectSpElement.textContent = `${huidigTrajectSp} SP`;
+                nogOpTeNemenSpElement.textContent = `${nogOpTeNemenSp} SP`;
                 totaleSpElement.textContent = `${totaleSp} SP`;
             };
 
@@ -119,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const details = courseCard.querySelector('.details');
                             details.textContent = `${vak.studiepunten} SP`; // Show only studiepunten
                             details.style.display = 'block';
-                            courseCard.classList.add('text-sm'); // Apply smaller font size
+                            courseCard.classList.add('text-xs'); // Apply smaller font size
                             dropzone.appendChild(courseCard); // Move courseCard to the new timeline period
                             updateStudyPoints();
                         }
