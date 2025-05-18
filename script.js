@@ -99,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
                             <span class="text-gray-800 font-medium">${vak.naam}</span>
-                            <span class="text-indigo-600 details">${vak.studiepunten} SP - ${vak.periode.join('/')}</span>
+                            <span class="text-gray-500 details">${vak.studiepunten} SP - ${vak.periode.join('/')} - Schijf ${vak.schijf}</span>
                         </div>
-                        <input type="checkbox" class="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 checkbox" />
+                        <input type="checkbox" class="w-5 h-5 text-gray-500 border-gray-300 rounded focus:ring-indigo-500 checkbox" />
                     </div>
                 `;
 
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Restore card appearance and move back to sidebar
                     courseCard.querySelector('.checkbox').style.display = 'block';
                     const details = courseCard.querySelector('.details');
-                    details.textContent = `${vak.studiepunten} SP - ${vak.periode.join('/')}`;
+                    details.textContent = `${vak.studiepunten} SP - ${vak.periode.join('/')} - Schijf ${vak.schijf}`;
                     details.style.display = 'block';
                     courseCard.classList.remove('text-xs');
                     sidebarDropzone.prepend(courseCard);
