@@ -1,41 +1,53 @@
+// =====================
+// Studietraject Planner Script
+// =====================
+// This script dynamically loads curriculum data, manages drag-and-drop for courses (vakken), and updates study point counters and UI messages.
+
+// Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     fetch('./curriculum.json')
         .then(response => response.json())
         .then(data => {
-            // Dynamically load the name of the opleiding
+            // --- HEADER ---
+            // Dynamically load the name of the opleiding (program)
             const header = document.querySelector('header p');
             header.textContent = `${data.opleiding.onderwijsinstelling} - ${data.opleiding.naam}`;
 
-            const vakkenLijst = document.getElementById('vakkenLijst');
+            // --- SIDEBAR (Op te nemen vakken) ---
+            const sidebarDropzone = document.getElementById('sidebarDropzone');
+            // Elements for study point counters
             const behaaldeSpElement = document.getElementById('behaaldeSp');
             const huidigTrajectSpElement = document.getElementById('huidigTrajectSp');
             const nogOpTeNemenSpElement = document.getElementById('nogOpTeNemenSp');
             const totaleSpElement = document.getElementById('totaleSp');
 
-            vakkenLijst.innerHTML = ''; // Clear existing content
+            // Clear sidebar before loading new courses
+            sidebarDropzone.innerHTML = '';
 
+            // --- STUDY POINTS CALCULATION ---
+            // Updates the counters for study points in the sidebar
             const updateStudyPoints = () => {
-                let behaaldeSp = 0;
-                let huidigTrajectSp = 0;
-                let nogOpTeNemenSp = 0;
+                let behaaldeSp = 0; // Points for completed courses
+                let huidigTrajectSp = 0; // Points for current trajectory
+                let nogOpTeNemenSp = 0; // Points for courses not yet taken
 
-                // Calculate behaalde studiepunten
-                document.querySelectorAll('#vakkenLijst .checkbox:checked').forEach(checkbox => {
+                // Calculate completed study points (checked checkboxes in sidebar)
+                sidebarDropzone.querySelectorAll('.checkbox:checked').forEach(checkbox => {
                     const courseCard = checkbox.closest('div');
                     const details = courseCard.querySelector('.details').textContent;
                     const studiepunten = parseInt(details.split(' ')[0]);
                     behaaldeSp += studiepunten;
                 });
 
-                // Calculate studiepunten in huidig traject
+                // Calculate study points in current trajectory (courses in timeline dropzones)
                 document.querySelectorAll('.dropzone > div').forEach(courseCard => {
                     const details = courseCard.querySelector('.details').textContent;
                     const studiepunten = parseInt(details.split(' ')[0]);
                     huidigTrajectSp += studiepunten;
                 });
 
-                // Calculate nog op te nemen studiepunten
-                document.querySelectorAll('#vakkenLijst > div').forEach(courseCard => {
+                // Calculate study points for courses not yet taken (unchecked in sidebar)
+                sidebarDropzone.querySelectorAll('> div').forEach(courseCard => {
                     const checkbox = courseCard.querySelector('.checkbox');
                     if (!checkbox.checked) {
                         const details = courseCard.querySelector('.details').textContent;
@@ -44,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
 
-                // Update totals
+                // Update totals in the UI
                 const totaleSp = behaaldeSp + huidigTrajectSp + nogOpTeNemenSp;
                 behaaldeSpElement.textContent = `${behaaldeSp} SP`;
                 huidigTrajectSpElement.textContent = `${huidigTrajectSp} SP`;
@@ -52,11 +64,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 totaleSpElement.textContent = `${totaleSp} SP`;
             };
 
+            // --- SIDEBAR EMPTY MESSAGE ---
+            // Shows a message if there are no more courses to take in the sidebar
+            function showSidebarEmptyMessage() {
+                if (sidebarDropzone.querySelectorAll('div.bg-white').length === 0) {
+                    if (!sidebarDropzone.querySelector('.sidebar-empty-msg')) {
+                        const msg = document.createElement('div');
+                        msg.className = 'sidebar-empty-msg text-gray-400 text-center py-2';
+                        msg.textContent = 'Geen vakken meer om op te nemen';
+                        sidebarDropzone.appendChild(msg);
+                    }
+                } else {
+                    const msg = sidebarDropzone.querySelector('.sidebar-empty-msg');
+                    if (msg) sidebarDropzone.removeChild(msg);
+                }
+            }
+
+            // --- UPDATE SIDEBAR AND POINTS ---
+            // Call after any sidebar change to update UI and counters
+            function updateSidebarAndPoints() {
+                showSidebarEmptyMessage();
+                updateStudyPoints();
+            }
+
+            // --- LOAD COURSES INTO SIDEBAR ---
+            // For each course, create a draggable card with a checkbox
             data.vakken.forEach(vak => {
                 const courseCard = document.createElement('div');
                 courseCard.className = 'bg-white border border-gray-300 rounded-lg p-4 shadow-sm';
                 courseCard.draggable = true;
 
+                // Card content: course name, details, and completion checkbox
                 courseCard.innerHTML = `
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
@@ -67,22 +105,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 `;
 
+                // --- CHECKBOX HANDLER ---
+                // Mark as completed (checked) or available (unchecked)
                 const checkbox = courseCard.querySelector('.checkbox');
                 checkbox.addEventListener('change', () => {
                     if (checkbox.checked) {
+                        // Mark as completed: style and move to bottom
                         courseCard.classList.add('bg-gray-200', 'text-gray-500');
                         courseCard.classList.remove('bg-white', 'text-gray-800');
                         courseCard.draggable = false; // Disable dragging
-                        vakkenLijst.appendChild(courseCard); // Move to the bottom
+                        sidebarDropzone.appendChild(courseCard); // Move to the bottom
                     } else {
+                        // Mark as available: style and move to top
                         courseCard.classList.remove('bg-gray-200', 'text-gray-500');
                         courseCard.classList.add('bg-white', 'text-gray-800');
                         courseCard.draggable = true; // Enable dragging
-                        vakkenLijst.prepend(courseCard); // Move back to the top
+                        sidebarDropzone.prepend(courseCard); // Move back to the top
                     }
-                    updateStudyPoints();
+                    updateSidebarAndPoints();
                 });
 
+                // --- DRAG START HANDLER ---
+                // When dragging a course, highlight valid dropzones
                 courseCard.addEventListener('dragstart', (e) => {
                     if (!checkbox.checked) {
                         e.dataTransfer.setData('text/plain', JSON.stringify(vak));
@@ -102,17 +146,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
 
+                // --- DRAG END HANDLER ---
+                // Remove highlights from all dropzones
                 courseCard.addEventListener('dragend', () => {
-                    // Remove highlights from all dropzones and remove dragover listener
                     document.querySelectorAll('.dropzone').forEach(dropzone => {
                         dropzone.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
                         dropzone.removeEventListener('dragover', preventDefaultHandler);
                     });
                 });
 
-                vakkenLijst.appendChild(courseCard);
+                // Add the course card to the sidebar
+                sidebarDropzone.appendChild(courseCard);
             });
 
+            // --- TIMELINE DROPZONES ---
+            // Handle dropping courses into timeline periods (modules/semesters)
             const dropzones = document.querySelectorAll('.dropzone');
             dropzones.forEach(dropzone => {
                 dropzone.addEventListener('drop', (e) => {
@@ -120,56 +168,65 @@ document.addEventListener("DOMContentLoaded", () => {
                     const vak = JSON.parse(e.dataTransfer.getData('text/plain'));
                     const targetPeriod = dropzone.parentElement.getAttribute('data-period').split('/');
 
+                    // Only allow drop if course period matches dropzone period
                     if (targetPeriod.some(period => vak.periode.includes(period))) {
                         const courseId = e.dataTransfer.getData('course-id');
-                        const courseCard = [...vakkenLijst.children, ...document.querySelectorAll('.dropzone > div')].find(card =>
+                        const courseCard = [...sidebarDropzone.children, ...document.querySelectorAll('.dropzone > div')].find(card =>
                             card.querySelector('span.text-gray-800').textContent === courseId
                         );
 
                         if (courseCard) {
-                            // Update courseCard appearance and move it to the new dropzone
+                            // Update card appearance and move to timeline
                             courseCard.querySelector('.checkbox').style.display = 'none';
                             const details = courseCard.querySelector('.details');
-                            details.textContent = `${vak.studiepunten} SP`; // Show only studiepunten
+                            details.textContent = `${vak.studiepunten} SP`; // Show only study points
                             details.style.display = 'block';
-                            courseCard.classList.add('text-xs'); // Apply smaller font size
-                            dropzone.appendChild(courseCard); // Move courseCard to the new timeline period
-                            updateStudyPoints();
+                            courseCard.classList.add('text-xs'); // Smaller font size
+                            dropzone.appendChild(courseCard); // Move to timeline
+                            updateSidebarAndPoints();
                         }
                     }
                 });
             });
 
-            vakkenLijst.addEventListener('dragover', (e) => {
-                e.preventDefault(); // Allow drop back to the sidebar
+            // --- SIDEBAR DROP HANDLER ---
+            // Allow dropping courses back to the sidebar
+            sidebarDropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
             });
 
-            vakkenLijst.addEventListener('drop', (e) => {
+            sidebarDropzone.addEventListener('drop', (e) => {
                 e.preventDefault();
-                const vak = JSON.parse(e.dataTransfer.getData('text/plain'));
-                const courseId = e.dataTransfer.getData('course-id');
+                let vak, courseId;
+                try {
+                    vak = JSON.parse(e.dataTransfer.getData('text/plain'));
+                    courseId = e.dataTransfer.getData('course-id');
+                } catch {
+                    return;
+                }
                 const courseCard = [...document.querySelectorAll('.dropzone > div')].find(card =>
                     card.querySelector('span.text-gray-800').textContent === courseId
                 );
-
                 if (courseCard) {
-                    // Show checkbox and period, and reset font size when moved back to the sidebar
+                    // Restore card appearance and move back to sidebar
                     courseCard.querySelector('.checkbox').style.display = 'block';
                     const details = courseCard.querySelector('.details');
-                    details.textContent = `${vak.studiepunten} SP - ${vak.periode.join('/')}`; // Restore full details
+                    details.textContent = `${vak.studiepunten} SP - ${vak.periode.join('/')}`;
                     details.style.display = 'block';
-                    courseCard.classList.remove('text-sm'); // Reset font size
-                    vakkenLijst.prepend(courseCard); // Move courseCard back to the sidebar
-                    updateStudyPoints();
+                    courseCard.classList.remove('text-sm', 'text-xs');
+                    sidebarDropzone.appendChild(courseCard);
+                    updateSidebarAndPoints();
                 }
             });
 
+            // --- UTILITY: Prevent default dragover behavior ---
             function preventDefaultHandler(e) {
                 e.preventDefault();
             }
 
-            // Initial calculation of study points
-            updateStudyPoints();
+            // --- INITIALIZE UI ---
+            // Initial calculation of study points and sidebar message
+            updateSidebarAndPoints();
         })
         .catch(error => console.error('Error loading curriculum:', error));
 });
